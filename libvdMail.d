@@ -6,8 +6,21 @@ class MailServer
 {
 	void handleConnection(Socket socket)
 	{
-		Thread thread = new Thread(&handleConnection_);
+		MailConnectionThread thread = new MailConnectionThread(this, socket);
 		thread.start();
+	}
+}
+
+class MailConnectionThread
+{
+	MailServer server_;
+	Socket socket_;
+
+	this(MailServer server, Socket socket)
+	{
+		// Store vars
+		server_ = server;
+		socket_ = socket;
 	}
 }
 
